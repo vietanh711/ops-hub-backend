@@ -15,7 +15,7 @@ model KnowledgeDoc {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   title      String
   category   String
-  content    String   
+  content    String   // Lưu nội dung Markdown
   updated_at DateTime @default(now())
 }
 
@@ -24,7 +24,7 @@ model TrainingQA {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   question String
   answer   String
-  tags     String[] 
+  tags     String[] // Lưu mảng các từ khóa (VD: ["Bug", "Deploy"])
 }
 
 // Module 3: Shift Handover & Task Tracker
@@ -34,19 +34,21 @@ model ShiftHandover {
   assignee      String
   issue_title   String
   status        String   @default("Pending") // Pending, In Progress, Resolved
-  handover_note String?  
+  handover_note String?  // Dấu ? nghĩa là có thể để trống (Optional)
+}
 
 // Bảng lưu thông tin nhân sự đăng nhập qua Microsoft
 model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   name  String
-  role  String @default("member") 
+  role  String @default("member") // Mặc định là member
+}
 
 // Bảng lưu trữ checklist công việc
 model Task {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   content        String
-  assignee_email String   
+  assignee_email String   // Gắn với email của User
   created_at     DateTime @default(now())
 }
