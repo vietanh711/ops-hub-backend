@@ -21,6 +21,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          cd backend # Đổi thành tên thư mục chứa backend của bạn
           docker build -t opshubregistry.azurecr.io/ops-backend:latest .
           docker push opshubregistry.azurecr.io/ops-backend:latest
