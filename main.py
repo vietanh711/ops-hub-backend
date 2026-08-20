@@ -12,7 +12,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173", 
-        "https://opshub-frontend-webapp-ercrgfa9czbfbpd5.japaneast-01.azurewebsites.net"
+        "https://opshub-frontend-webapp-ercrgfa9czbfbpd5.japaneast-01.azurewebsites.net",
+        "https://opshub.vietanh1220057a.workers.dev",
     ],
     allow_credentials=True,
     allow_methods=["*"],
