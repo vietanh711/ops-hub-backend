@@ -18,8 +18,7 @@ RUN prisma generate
 # Copy toàn bộ code còn lại
 COPY . .
 
-# Mở cổng 8000
-EXPOSE 8000
+EXPOSE 80
 
 # Chạy server FastAPI
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
