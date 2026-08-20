@@ -1,0 +1,54 @@
+// schema.prisma
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider             = "prisma-client-py"
+  recursive_type_depth = 5
+}
+
+// Module 1: Knowledge Base
+model KnowledgeDoc {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  category   String
+  content    String   // Lưu nội dung Markdown
+  updated_at DateTime @default(now())
+}
+
+// Module 2: Training & Q&A
+model TrainingQA {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  question String
+  answer   String
+  tags     String[] // Lưu mảng các từ khóa (VD: ["Bug", "Deploy"])
+}
+
+// Module 3: Shift Handover & Task Tracker
+model ShiftHandover {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  shift_date    DateTime @default(now())
+  assignee      String
+  issue_title   String
+  status        String   @default("Pending") // Pending, In Progress, Resolved
+  handover_note String?  // Dấu ? nghĩa là có thể để trống (Optional)
+}
+
+// Bảng lưu thông tin nhân sự đăng nhập qua Microsoft
+model User {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  name  String
+  role  String @default("member") // Mặc định là member, bạn sẽ tự sửa thành "lead team" trong DB
+}
+
+// Bảng lưu trữ checklist công việc
+model Task {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  content        String
+  assignee_email String   // Gắn với email của User
+  created_at     DateTime @default(now())
+}
