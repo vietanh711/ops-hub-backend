@@ -3,8 +3,7 @@ name: Build and Push Backend to ACR
 on:
   push:
     branches:
-      - main # Tự động kích hoạt khi có code mới đẩy lên nhánh main
-
+      - main 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
